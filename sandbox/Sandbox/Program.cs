@@ -4,6 +4,15 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Sandbox Project.");
+       Console.Write(" what is your first name?");
+        string first = Console.ReadLine();
+
+        Console.Write(" what is your last name?");
+        string last = Console.ReadLine();
+
+        Console.WriteLine($"your full name is {last}, {first}, {last}.");
+
+
     }
+
 }
