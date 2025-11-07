@@ -1,3 +1,4 @@
+// I added a mood selection feature to the journal entries.// The user can now select their mood from a list of emojis when creating a new journal entry.
 using System;
 
 class Program
