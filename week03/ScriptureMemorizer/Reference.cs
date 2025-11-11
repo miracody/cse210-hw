@@ -8,16 +8,29 @@ public class Reference
 
     public Reference(string book, int chapter, int verse)
     {
-        // TODO: Initialize single verse
+        _book = book;
+        _chapter = chapter;
+        _verseStart = verse;
+        _verseEnd = verse;
     }
 
     public Reference(string book, int chapter, int verseStart, int verseEnd)
     {
-        // TODO: Initialize verse range
+        _book = book;
+        _chapter = chapter;
+        _verseStart = verseStart;
+        _verseEnd = verseEnd;
     }
 
     public string GetDisplayText()
     {
-        return ""; // placeholder
+        if (_verseStart == _verseEnd)
+        {
+            return $"{_book} {_chapter}:{_verseStart}";
+        }
+        else
+        {
+            return $"{_book} {_chapter}:{_verseStart}-{_verseEnd}";
+        }
     }
 }

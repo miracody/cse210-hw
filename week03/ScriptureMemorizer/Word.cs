@@ -6,26 +6,27 @@ public class Word
 
     public Word(string text)
     {
-        // TODO: Initialize word as visible
+        _text = text;
+        _isHidden = false;
     }
 
     public void Hide()
     {
-        // TODO: Set _isHidden to true
+        _isHidden = true;
     }
 
     public void Show()
     {
-        // TODO: Set _isHidden to false
-    }
-
-    public string GetDisplayText()
-    {
-        return ""; // placeholder
+        _isHidden = false;
     }
 
     public bool IsHidden()
     {
-        return false; // placeholder
+        return _isHidden;
+    }
+
+    public string GetDisplayText()
+    {
+        return _isHidden ? "_____" : _text;
     }
 }
