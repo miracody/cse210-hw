@@ -2,8 +2,8 @@ using System;
 
 // Enhancements beyond core requirements:
 // - Implemented a 'hint' feature: users can type 'hint' to reveal one hidden word.
-// - This adds interactivity and supports users who want help during memorization.
 // - The feature is handled in the main loop and uses RevealOneHiddenWord() in the Scripture class.
+using System;
 
 class Program
 {
@@ -18,21 +18,15 @@ class Program
         {
             Console.Clear();
             Console.WriteLine(scripture.GetDisplayText());
-            Console.WriteLine("\nPress Enter to hide more words, type 'hint' for a hint, or 'quit' to exit.");
+            Console.WriteLine("\nPress Enter to hide more words or type 'quit' to exit.");
             string input = Console.ReadLine();
 
             if (input.ToLower() == "quit" || scripture.IsCompletelyHidden())
             {
                 break;
             }
-            else if (input.ToLower() == "hint")
-            {
-                scripture.RevealOneHiddenWord();
-            }
-            else
-            {
-                scripture.HideRandomWords(3);
-            }
+
+            scripture.HideRandomWords(3);
         }
 
         Console.WriteLine("\nThanks for using the Scripture Memorizer!");

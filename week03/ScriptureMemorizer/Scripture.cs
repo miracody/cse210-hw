@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+using System;
+using System.Collections.Generic;
+
 public class Scripture
 {
     private Reference _reference;
@@ -23,4 +26,43 @@ public class Scripture
     {
         int hiddenCount = 0;
 
-        while
+        while (hiddenCount < numberToHide)
+        {
+            List<Word> visibleWords = _words.FindAll(w => !w.IsHidden());
+
+            if (visibleWords.Count == 0)
+            {
+                break;
+            }
+
+            int index = _random.Next(visibleWords.Count);
+            visibleWords[index].Hide();
+            hiddenCount++;
+        }
+    }
+
+    public string GetDisplayText()
+    {
+        string referenceText = _reference.GetDisplayText();
+        List<string> displayWords = new List<string>();
+
+        foreach (Word word in _words)
+        {
+            displayWords.Add(word.GetDisplayText());
+        }
+
+        return $"{referenceText}\n{string.Join(" ", displayWords)}";
+    }
+
+    public bool IsCompletelyHidden()
+    {
+        foreach (Word word in _words)
+        {
+            if (!word.IsHidden())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
