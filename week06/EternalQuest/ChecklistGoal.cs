@@ -29,7 +29,8 @@ public class ChecklistGoal : Goal
 
     public override string GetDetailsString()
     {
-        return $"[ {(IsComplete() ? "X" : " ")} ] {_shortName} ({_description}) -- Completed {_amountCompleted}/{_target}";
+        string progressBar = new string('■', _amountCompleted) + new string('□', _target - _amountCompleted);
+        return $"[ {(IsComplete() ? "X" : " ")} ] {_shortName} ({_description}) -- {progressBar} {_amountCompleted}/{_target}";
     }
 
     public override string GetStringRepresentation()

@@ -7,7 +7,7 @@ public class EternalGoal : Goal
 
     public override int RecordEvent()
     {
-        return _points; // Always awards points, never complete
+        return _points; // Always awards points
     }
 
     public override bool IsComplete()

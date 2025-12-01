@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 public class GoalManager
-{
+  {
     private List<Goal> _goals;
     private int _score;
     private int _level;
@@ -26,7 +26,7 @@ public class GoalManager
         bool running = true;
         while (running)
         {
-            Console.WriteLine("\nMenu:");
+            Console.WriteLine("\n=== Eternal Quest Menu ===");
             Console.WriteLine("1. Display Player Info");
             Console.WriteLine("2. List Goal Names");
             Console.WriteLine("3. List Goal Details");
@@ -53,10 +53,10 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-        Console.WriteLine($"Score: {_score} | Level: {_level}");
-        Console.WriteLine($"Total Goals Completed: {_totalGoalsCompleted}");
-        Console.WriteLine($"Current Streak: {_streak}");
-        Console.WriteLine("Badges: " + ( _badges.Count > 0 ? string.Join(", ", _badges) : "None yet"));
+        Console.WriteLine($"\n🏆 Score: {_score} | Level: {_level}");
+        Console.WriteLine($"✅ Total Goals Completed: {_totalGoalsCompleted}");
+        Console.WriteLine($"🔥 Current Streak: {_streak}");
+        Console.WriteLine("🎖️ Badges: " + (_badges.Count > 0 ? string.Join(", ", _badges) : "None yet"));
     }
 
     public void ListGoalNames()
@@ -114,7 +114,7 @@ public class GoalManager
             _streak++;
             if (_goals[choice].IsComplete()) _totalGoalsCompleted++;
 
-            Console.WriteLine($"You earned {pointsEarned} points!");
+            Console.WriteLine($"🎉 You earned {pointsEarned} points!");
 
             CheckLevelUp();
             CheckBadges();
@@ -126,7 +126,7 @@ public class GoalManager
         if (_score >= _level * 100)
         {
             _level++;
-            Console.WriteLine($"🎉 Congratulations! You reached Level {_level}!");
+            Console.WriteLine($"🚀 Level Up! You reached Level {_level}!");
         }
     }
 
@@ -169,7 +169,7 @@ public class GoalManager
                 outputFile.WriteLine(goal.GetStringRepresentation());
             }
         }
-        Console.WriteLine("Goals saved.");
+        Console.WriteLine("💾 Goals saved.");
     }
 
     public void LoadGoals()
@@ -190,9 +190,9 @@ public class GoalManager
             }
             else if (type == "ChecklistGoal")
             {
-                _goals.Add(new ChecklistGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[5]), int.Parse(parts[6])));
+                _goals.Add(new ChecklistGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[5])));
             }
         }
-        Console.WriteLine("Goals loaded.");
+        Console.WriteLine("📂 Goals loaded.");
     }
 }
