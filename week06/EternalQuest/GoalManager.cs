@@ -6,11 +6,19 @@ public class GoalManager
 {
     private List<Goal> _goals;
     private int _score;
+    private int _level;
+    private int _totalGoalsCompleted;
+    private int _streak;
+    private List<string> _badges;
 
     public GoalManager()
     {
         _goals = new List<Goal>();
         _score = 0;
+        _level = 1;
+        _totalGoalsCompleted = 0;
+        _streak = 0;
+        _badges = new List<string>();
     }
 
     public void Start()
@@ -45,7 +53,10 @@ public class GoalManager
 
     public void DisplayPlayerInfo()
     {
-        Console.WriteLine($"Current Score: {_score}");
+        Console.WriteLine($"Score: {_score} | Level: {_level}");
+        Console.WriteLine($"Total Goals Completed: {_totalGoalsCompleted}");
+        Console.WriteLine($"Current Streak: {_streak}");
+        Console.WriteLine("Badges: " + ( _badges.Count > 0 ? string.Join(", ", _badges) : "None yet"));
     }
 
     public void ListGoalNames()
@@ -100,7 +111,52 @@ public class GoalManager
         {
             int pointsEarned = _goals[choice].RecordEvent();
             _score += pointsEarned;
+            _streak++;
+            if (_goals[choice].IsComplete()) _totalGoalsCompleted++;
+
             Console.WriteLine($"You earned {pointsEarned} points!");
+
+            CheckLevelUp();
+            CheckBadges();
+        }
+    }
+
+    private void CheckLevelUp()
+    {
+        if (_score >= _level * 100)
+        {
+            _level++;
+            Console.WriteLine($"🎉 Congratulations! You reached Level {_level}!");
+        }
+    }
+
+    private void CheckBadges()
+    {
+        int eternalCount = 0;
+        int checklistCompleted = 0;
+
+        foreach (Goal goal in _goals)
+        {
+            if (goal is EternalGoal) eternalCount++;
+            if (goal is ChecklistGoal && goal.IsComplete()) checklistCompleted++;
+        }
+
+        if (eternalCount >= 5 && !_badges.Contains("Consistency Star"))
+        {
+            _badges.Add("Consistency Star");
+            Console.WriteLine("🏅 Badge Earned: Consistency Star!");
+        }
+
+        if (checklistCompleted >= 3 && !_badges.Contains("Checklist Master"))
+        {
+            _badges.Add("Checklist Master");
+            Console.WriteLine("🏅 Badge Earned: Checklist Master!");
+        }
+
+        if (_totalGoalsCompleted >= 10 && !_badges.Contains("Goal Getter"))
+        {
+            _badges.Add("Goal Getter");
+            Console.WriteLine("🏅 Badge Earned: Goal Getter!");
         }
     }
 
