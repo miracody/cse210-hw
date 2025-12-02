@@ -1,4 +1,5 @@
-// Shape.cs
+using System;
+
 public abstract class Shape
 {
     private string _color;
@@ -13,6 +14,11 @@ public abstract class Shape
         return _color;
     }
 
-    // Abstract method forces derived classes to implement their own area calculation
+    public void SetColor(string color)
+    {
+        _color = color;
+    }
+
+    // Virtual/abstract method for polymorphism
     public abstract double GetArea();
 }

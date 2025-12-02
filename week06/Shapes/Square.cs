@@ -1,4 +1,3 @@
-// Square.cs
 public class Square : Shape
 {
     private double _side;

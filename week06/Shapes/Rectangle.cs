@@ -1,4 +1,3 @@
-// Rectangle.cs
 public class Rectangle : Shape
 {
     private double _length;
