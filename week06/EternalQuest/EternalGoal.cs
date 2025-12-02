@@ -13,12 +13,12 @@ public class EternalGoal : Goal
     public override int RecordEvent()
     {
         _timesRecorded++;
-        return _points; // Always awards points
+        return _points;
     }
 
     public override bool IsComplete()
     {
-        return false; // Eternal goals never complete
+        return false;
     }
 
     public override string GetDetailsString()

@@ -195,7 +195,7 @@ public class GoalManager
             {
                 bool isComplete = bool.Parse(parts[4]);
                 SimpleGoal sg = new SimpleGoal(parts[1], parts[2], int.Parse(parts[3]));
-                if (isComplete) sg.RecordEvent(); // mark complete if saved as complete
+                if (isComplete) sg.RecordEvent(); 
                 _goals.Add(sg);
             }
             else if (type == "EternalGoal")
@@ -205,7 +205,7 @@ public class GoalManager
             else if (type == "ChecklistGoal")
             {
                 ChecklistGoal cg = new ChecklistGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[5]), int.Parse(parts[6]));
-                // restore progress
+                
                 for (int i = 0; i < int.Parse(parts[4]); i++) cg.RecordEvent();
                 _goals.Add(cg);
             }
