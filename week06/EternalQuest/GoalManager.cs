@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 public class GoalManager
-  {
+{
     private List<Goal> _goals;
     private int _score;
     private int _level;
@@ -47,6 +47,7 @@ public class GoalManager
                 case "6": SaveGoals(); break;
                 case "7": LoadGoals(); break;
                 case "8": running = false; break;
+                default: Console.WriteLine("Invalid choice, try again."); break;
             }
         }
     }
@@ -119,6 +120,10 @@ public class GoalManager
             CheckLevelUp();
             CheckBadges();
         }
+        else
+        {
+            Console.WriteLine("Invalid goal selection.");
+        }
     }
 
     private void CheckLevelUp()
@@ -175,6 +180,12 @@ public class GoalManager
     public void LoadGoals()
     {
         _goals.Clear();
+        if (!File.Exists("goals.txt"))
+        {
+            Console.WriteLine("No saved goals found.");
+            return;
+        }
+
         string[] lines = File.ReadAllLines("goals.txt");
         foreach (string line in lines)
         {
@@ -182,7 +193,10 @@ public class GoalManager
             string type = parts[0];
             if (type == "SimpleGoal")
             {
-                _goals.Add(new SimpleGoal(parts[1], parts[2], int.Parse(parts[3])));
+                bool isComplete = bool.Parse(parts[4]);
+                SimpleGoal sg = new SimpleGoal(parts[1], parts[2], int.Parse(parts[3]));
+                if (isComplete) sg.RecordEvent(); // mark complete if saved as complete
+                _goals.Add(sg);
             }
             else if (type == "EternalGoal")
             {
@@ -190,7 +204,10 @@ public class GoalManager
             }
             else if (type == "ChecklistGoal")
             {
-                _goals.Add(new ChecklistGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[5])));
+                ChecklistGoal cg = new ChecklistGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[5]), int.Parse(parts[6]));
+                // restore progress
+                for (int i = 0; i < int.Parse(parts[4]); i++) cg.RecordEvent();
+                _goals.Add(cg);
             }
         }
         Console.WriteLine("📂 Goals loaded.");
