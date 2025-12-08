@@ -1,4 +1,4 @@
-// i added player stats tracking including score, level, total goals completed, streaks, and badges
+// I added player stats tracking including score, level, total goals completed, streaks, and badges
 using System;
 
 class Program
